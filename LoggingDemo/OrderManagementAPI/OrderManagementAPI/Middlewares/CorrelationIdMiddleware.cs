@@ -17,12 +17,13 @@
             await _next(httpContext);
         }
 
-        public static class CorrelationIdMiddlewareExtensions
+
+    }
+    public static class CorrelationIdMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseCorrelationId(this IApplicationBuilder builder)
         {
-            public static IApplicationBuilder UseCorrelationId(IApplicationBuilder builder)
-            {
-                return builder.UseMiddleware<CorrelationIdMiddleware>();
-            }
+            return builder.UseMiddleware<CorrelationIdMiddleware>();
         }
     }
 }

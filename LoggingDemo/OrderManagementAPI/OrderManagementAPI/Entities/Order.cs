@@ -8,6 +8,7 @@ namespace OrderManagementAPI.Entities
         public int Id { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
         public int CustomerId {  get; set; }
+        public Customer? Customer { get; set; }
         [Column(TypeName ="decimal(18,2)")]
         public decimal TotalAmount {  get; set; }
         [Required, StringLength(20)]

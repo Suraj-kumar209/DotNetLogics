@@ -1,4 +1,9 @@
 
+using Microsoft.EntityFrameworkCore;
+using OrderManagementAPI.Data;
+using OrderManagementAPI.Services;
+using OrderManagementAPI.Middlewares;
+
 namespace OrderManagementAPI
 {
     public class Program
@@ -10,10 +15,19 @@ namespace OrderManagementAPI
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<OrderManagementDBContext>(option =>
+            {
+                option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddScoped<IOrderService,OrderService>();
+            builder.Services.AddSingleton<ICorrelationIdAccessor,CorrelationIdAccessor>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+            builder.Logging.AddDebug();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -24,6 +38,7 @@ namespace OrderManagementAPI
             }
 
             app.UseHttpsRedirection();
+            app.UseCorrelationId();
 
             app.UseAuthorization();
 
