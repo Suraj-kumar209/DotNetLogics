@@ -12,8 +12,8 @@ using OrderManagementAPI.Data;
 namespace OrderManagementAPI.Migrations
 {
     [DbContext(typeof(OrderManagementDBContext))]
-    [Migration("20260325095545_Mig1")]
-    partial class Mig1
+    [Migration("20260325100648_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,7 +151,7 @@ namespace OrderManagementAPI.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");

@@ -15,7 +15,7 @@ namespace OrderManagementAPI.Entities
         [Column(TypeName = "decimal(18,2)")]
         public decimal UnitPrice { get; set; }
         [Column(TypeName = "decimal(18,2)")]
-        public decimal LineTotal { get; set; }   // Quantity * UnitPrice
+        public decimal LineTotal { get; set; }   
         [ForeignKey(nameof(OrderId))]
         public Order? Order { get; set; }
         [ForeignKey(nameof(ProductId))]
